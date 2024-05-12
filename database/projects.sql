@@ -1,0 +1,4 @@
+CREATE TABLE "projects" ("id" integer primary key autoincrement not null, "skills" text not null, "title" varchar not null, "description" text not null, "img_url" text not null, "source" varchar, "created_at" datetime, "updated_at" datetime);
+
+INSERT INTO "projects" ("id", "skills", "title", "description", "img_url", "source", "created_at", "updated_at") VALUES
+(1, '[ { "title": "tailwind", "description": "Lorem Ipsum Dolor sit amet", "icon_url": "https://www.google.com" }, { "title": "tailwind", "description": "Lorem Ipsum Dolor sit amet", "icon_url": "https://www.bing.com" }, { "title": "tailwind", "description": "Lorem Ipsum Dolor sit amet", "icon_url": "https://www.duckduckgo.com" } ]', 'title', 'description', 'https://image.com', 'https://github.com', '0001-01-01', '0001-01-01');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::all();
+        return response(Project::all(), 200)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -29,7 +29,21 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'skills' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'img_url' => 'required|file|image|max:10240',
+            'source' => 'string'
+        ]);
+
+        $validated['img_url'] = $request->file('img_url')->store('public/images');
+        Project::create($validated);
+
+        return response()->json([
+            'message' => "Submission successfully",
+        ], 200);
+
     }
 
     /**
