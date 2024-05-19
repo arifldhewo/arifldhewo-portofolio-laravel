@@ -33,13 +33,20 @@ class ProjectController extends Controller
             'skills' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'img_url' => 'required|file|image|max:10240',
             'source' => 'string'
         ]);
 
-        $validated['img_url'] = $request->file('img_url')->store('public/images');
-        Project::create($validated);
+        $imgArray = [];
+        $indexImg = 0;
 
+        foreach($request->img_url as $img){
+            $imgArray[$indexImg++] = $img->store('public/images');
+        }
+
+        $validated['img_url'] = collect($imgArray)->implode(',');
+
+        Project::create($validated);
+        
         return response()->json([
             'message' => "Submission successfully",
         ], 200);

@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
     })->middleware('auth:sanctum'); 
 */
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::controller(ProjectController::class)->prefix('cms')->group(function () {
     Route::post('/project', 'store');
